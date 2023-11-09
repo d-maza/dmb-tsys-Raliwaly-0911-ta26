@@ -19,9 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dmb.entities.Pieza;
 import com.dmb.services.PiezaService;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.servers.Server;
+
 @RestController
 @RequestMapping("api/v1")
 @CrossOrigin(origins = "*")
+@OpenAPIDefinition(
+		  servers = {
+		    @Server(url = "https://dmb-tsys-raliwaly-0911-ta26-production.up.railway.app/", description = "Default Server URL")
+		  }
+		)
 public class PiezaController {
 
 	@Autowired
