@@ -21,7 +21,7 @@ import com.dmb.services.PiezaService;
 
 @RestController
 @RequestMapping("api/v1")
-@CrossOrigin (origins = "*")
+@CrossOrigin(origins = "*")
 public class PiezaController {
 
 	@Autowired
