@@ -25,59 +25,41 @@ import io.swagger.v3.oas.annotations.servers.Server;
 @RestController
 @RequestMapping("api/v1")
 @CrossOrigin(origins = "*")
-@OpenAPIDefinition(
-		  servers = {
-		    @Server(url = "https://dmb-tsys-raliwaly-0911-ta26-production.up.railway.app/", description = "Default Server URL")
-		  }
-		)
 public class PiezaController {
 
 	@Autowired
 	private PiezaService serv;
 
 	@GetMapping("/piezas")
-	public ResponseEntity<List<Pieza>> getAllPieza() {
-		return ResponseEntity.ok(serv.getAllPieza());
+	public List<Pieza> getAllPieza() {
+		return serv.getAllPieza();
 	}
 
 	@GetMapping("/pieza/{id}")
-	public ResponseEntity<Pieza> getOnePieza(@PathVariable(name = "id") Long id) {
-		Optional<Pieza> pieza = serv.getOnePieza(id);
-
-		if (pieza.isPresent()) {
-			return ResponseEntity.ok(pieza.get());
-		} else {
-			return ResponseEntity.notFound().build();
-		}
+	public Pieza getOnePieza(@PathVariable(name = "id") Long id) {
+			return serv.getOnePieza(id).get();
 
 	}
 
 	@PostMapping("/pieza")
-	public ResponseEntity<Pieza> savePieza(@RequestBody Pieza entity) {
-		return ResponseEntity.ok(serv.createPieza(entity));
+	public Pieza savePieza(@RequestBody Pieza entity) {
+		return serv.createPieza(entity);
 	}
 
 	@PutMapping("/pieza/{id}")
-	public ResponseEntity<Pieza> updatePieza(@PathVariable(name = "id") Long id, @RequestBody Pieza entity) {
-		Optional<Pieza> entityOld = serv.getOnePieza(id);
-
-		if (entityOld.isPresent()) {
-			Pieza entityUpdate = serv.createPieza(entity);
-			return ResponseEntity.ok(entityUpdate);
-		} else {
-			return ResponseEntity.notFound().build();
-		}
+	public Pieza updatePieza(@PathVariable(name = "id") Long id, @RequestBody Pieza entity) {
+		  Pieza entityOld = serv.getOnePieza(id).get();
+		  entity.setId(entityOld.getId());
+		  entity.setNombre(entity.getNombre());
+		  entity.setSuministra(entityOld.getSuministra());		  
+		  return serv.updatePieza(entity);	  
+	
 	}
 
 	@DeleteMapping("/pieza/{id}")
-	public ResponseEntity<Void> deletePieza(@PathVariable(name = "id") Long id) {
-		Optional<Pieza> entity = serv.getOnePieza(id);
-		if (entity.isPresent()) {
+	public void deletePieza(@PathVariable(name = "id") Long id) {
 			serv.deletePieza(id);
-			return ResponseEntity.noContent().build();
-		} else {
-			return ResponseEntity.notFound().build();
-		}
+		
 	}
 
 }
