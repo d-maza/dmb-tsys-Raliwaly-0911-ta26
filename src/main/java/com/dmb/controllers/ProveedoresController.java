@@ -27,49 +27,32 @@ public class ProveedoresController {
 	private ProveedorService serv;
 	
 	@GetMapping("/proveedors")
-	public ResponseEntity<List<Proveedor>> getAllProveedor() {
-		return ResponseEntity.ok(serv.getAllProveedor());
+	public List<Proveedor> getAllProveedor() {
+		return serv.getAllProveedor();
 	}
 
 	@GetMapping("/proveedor/{id}")
-	public ResponseEntity<Proveedor> getOneProveedor(@PathVariable(name = "id")String id) {
-		Optional<Proveedor> proveedor = serv.getOneProveedor(id);
-
-		if (proveedor.isPresent()) {
-			return ResponseEntity.ok( proveedor.get());
-		} else {
-			return ResponseEntity.notFound().build();
-		}
-
+	public Proveedor getOneProveedor(@PathVariable(name = "id")String id) {
+		return serv.getOneProveedor(id).get();
 	}
 	
 	@PostMapping("/proveedor")
-	public ResponseEntity<Proveedor> saveProveedor(@RequestBody Proveedor entity) {
-		return ResponseEntity.ok( serv.createProveedor(entity));
+	public Proveedor saveProveedor(@RequestBody Proveedor entity) {
+		return serv.createProveedor(entity);
 	}
 	
 	@PutMapping("/proveedor/{id}")
-	public ResponseEntity<Proveedor> updateProveedor(@PathVariable(name = "id") String id , @RequestBody Proveedor entity ){
-		Optional<Proveedor> proveedor = serv.getOneProveedor(id);
-		
-		if (proveedor.isPresent()) {
-			entity.setId(id);
-			return ResponseEntity.ok(entity);
-		} else {
-			return ResponseEntity.notFound().build();
-		}
+	public Proveedor updateProveedor(@PathVariable(name = "id") String id , @RequestBody Proveedor entity ){
+		 Proveedor proveedorOLD = serv.getOneProveedor(id).get();
+		 proveedorOLD.setNombre(entity.getNombre());
+		 proveedorOLD.setSuministra(entity.getSuministra());
+		 return proveedorOLD;
 	}
 	
 
 	@DeleteMapping("/proveedor/{id}")
-	public ResponseEntity<Void> deleteProveedor(@PathVariable(name = "id") String id){
-		Optional<Proveedor> proveedor = serv.getOneProveedor(id);
-		if (proveedor.isPresent()) {
-			serv.deleteProveedor(id);
-			return ResponseEntity.noContent().build();
-		} else {
-			return ResponseEntity.notFound().build();
-		}
+	public void deleteProveedor(@PathVariable(name = "id") String id){
+		serv.deleteProveedor(id);
 	}
 
 }
