@@ -20,7 +20,6 @@ import com.dmb.services.ProveedorService;
 
 @RestController
 @RequestMapping("api/v1")
-@CrossOrigin (origins = "*")
 public class ProveedoresController {
 	
 	@Autowired

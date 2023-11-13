@@ -20,7 +20,6 @@ import com.dmb.services.SuministraService;
 
 @RestController
 @RequestMapping("api/v1")
-@CrossOrigin (origins = "*")
 public class SuministraController {
 	
 	@Autowired
