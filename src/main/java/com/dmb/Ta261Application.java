@@ -18,7 +18,7 @@ public class Ta261Application {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/api/**").allowedOrigins("/**").allowedMethods("*").allowedHeaders("*");
+				registry.addMapping("/api/**").allowedOrigins("http://david-maza-ta26.up.railway.app").allowedMethods("*").allowedHeaders("*");
 			}
 		};
 	}
