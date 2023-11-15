@@ -8,7 +8,7 @@
 
 Este repositorio contiene las tareas del Bootcamp 👨‍💻
 
-<div align="center"><img width="80%"  src="https://github.com/d-maza/dmb-tsys-Raliwaly-0911-ta26_1/2023-11-09-212402.png?raw=trueg"  alt="Imagen Captura" /></div>
+<div align="center"><img width="80%"  src="https://github.com/d-maza/dmb-tsys-Raliwaly-0911-ta26/blob/main/2023-11-09-212402.png?raw=true"  alt="Imagen Captura" /></div>
 
 #### ### Rules of use 🤜🏼🤛🏼
 
